@@ -10,12 +10,19 @@ class ConanOptionsConan(ConanFile):
     description = "<Description of ConanOptions here>"
     topics = ("<Put some tag here>", "<here>", "<and here>")
     settings = "os", "compiler", "build_type", "arch"
-    options = {"shared": [True, False]}
-    default_options = {"shared": False}
+    options = {
+            "shared": [True, False],
+            "option1": ["value1", "value2"],
+            }
+    default_options = {
+            "shared": False,
+            "option1": "value1",
+            }
     generators = "cmake"
     exports_sources = "src/*"
 
     def build(self):
+        self.output.info(f"self.options.option1={self.options.option1}")
         cmake = CMake(self)
         cmake.configure(source_folder="src")
         cmake.build()

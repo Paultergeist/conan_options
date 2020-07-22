@@ -5,6 +5,14 @@ from conans import ConanFile, CMake, tools
 
 class ConanOptionsTestConan(ConanFile):
     settings = "os", "compiler", "build_type", "arch"
+    options = {
+            "shared": [True, False],
+            "option1": ["value1", "value2"],
+            }
+    default_options = {
+            "shared": False,
+            "option1": "value1",
+            }
     generators = "cmake"
 
     def build(self):
